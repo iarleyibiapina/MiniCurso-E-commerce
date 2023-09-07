@@ -20,8 +20,28 @@ const produtoTres = {
   precoProduto: 350.0,
   nomeArquivoImagem: "product-3.jpg",
 };
+const produtoQuatro = {
+  idProduto: 4,
+  nomeProduto: "Bolsa",
+  marcaProduto: "zent",
+  precoProduto: 999.0,
+  nomeArquivoImagem: "product-4.jpg",
+};
+const produtoCinco = {
+  idProduto: 5,
+  nomeProduto: "joia dagua",
+  marcaProduto: "lol",
+  precoProduto: 100.0,
+  nomeArquivoImagem: "product-5.jpg",
+};
 
-const catalogoProduto = [produtoUm, produtoDois, produtoTres];
+const catalogoProduto = [
+  produtoUm,
+  produtoDois,
+  produtoTres,
+  produtoQuatro,
+  produtoCinco,
+];
 
 // string templates
 
@@ -29,16 +49,18 @@ const catalogoProduto = [produtoUm, produtoDois, produtoTres];
 // percorrendo cada produto
 for (const produtoDoCatalogo of catalogoProduto) {
   const cartaoProdutoCatalogo = `
-<div id="item-product" class="card-product">
+<div id="item-product-${produtoDoCatalogo.idProduto}" class="border-solid border-2 border-sky-500 w-48 p-2 m-2">
 <img
   src="assets/img/${produtoDoCatalogo.nomeArquivoImagem}"
   alt="imagem produto 1"
-  style="height: 200px"
+  style="height: 240px"
 />
+<div id="legend">
 <p><strong>${produtoDoCatalogo.marcaProduto}</strong></p>
 <p>${produtoDoCatalogo.nomeProduto}</p>
 <p>$${produtoDoCatalogo.precoProduto}</p>
 <button onclick="alert('Adicionado')">Adicionar ao carrinho.</button>
+</div>
 </div>
 `;
   document.getElementById("product-area").innerHTML += cartaoProdutoCatalogo;

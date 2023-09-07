@@ -1,3 +1,6 @@
+// trazendo o arquivo, primeiro a funçao quer sera pega e depois o caminho
+import { inicializarCarrinho } from "./menuCarrinho";
+
 // criando objeto que sera cada produto
 const produtoUm = {
   idProduto: 1,
@@ -66,3 +69,6 @@ for (const produtoDoCatalogo of catalogoProduto) {
 `;
   document.getElementById("product-area").innerHTML += cartaoProdutoCatalogo;
 }
+
+// depois de importar é preciso 'ativar' a funçao
+inicializarCarrinho();

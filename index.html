@@ -16,15 +16,15 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body>
+  <body class="bg-stone-200">
     <!-- [] no tailwind serve para adicionar propriedades diferentes do que as pre-definidas -->
     <section
       id="carrinho"
-      class="fixed right-0 top-0 bg-indigo-950 h-screen w-[360px] text-slate-200"
+      class="fixed right-[-360px] top-0 bg-indigo-950 h-screen w-[360px] text-slate-200 z-50"
     >
       <div id="cabecalho-carrinho" class="flex justify-between m-4">
         <p>Meu carrinho</p>
-        <button>
+        <button id="fechar-carrinho">
           <i class="fa-solid fa-xmark" style="color: #ffffff"></i>
         </button>
       </div>
@@ -33,7 +33,6 @@
         <p>casaco</p>
         <p>jaqueta</p>
       </section>
-      <!-- footer -->
       <p id="preco-total">R$200</p>
       <button class="bg-slate-200 text-slate-900">Finalizar compra</button>
     </section>
@@ -49,7 +48,7 @@
           <i class="fa-solid fa-hand"></i>
         </button>
         <button title="Perfil"><i class="fa-solid fa-user"></i></button>
-        <button title="Carrinho">
+        <button id="abrir-carrinho" title="Carrinho">
           <i class="fa-solid fa-cart-arrow-down" style="color: #ffffff"></i>
         </button>
       </div>
@@ -58,5 +57,6 @@
       <section id="product-area" class="flex m-2"></section>
     </main>
     <script type="module" src="./src/js/main.js"></script>
+    <!-- <script type="module" src="./src/js/menuCarrinho.js"></script> -->
   </body>
 </html>

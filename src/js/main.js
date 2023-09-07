@@ -51,6 +51,7 @@ for (const produtoDoCatalogo of catalogoProduto) {
   const cartaoProdutoCatalogo = `
 <div id="item-product-${produtoDoCatalogo.idProduto}" class="border-solid border-2 border-sky-500 w-48 p-2 m-2">
 <img
+  class="w-auto"
   src="assets/img/${produtoDoCatalogo.nomeArquivoImagem}"
   alt="imagem produto 1"
   style="height: 240px"

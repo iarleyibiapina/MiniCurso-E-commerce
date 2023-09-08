@@ -1,4 +1,5 @@
 import { catalogo } from "./dados";
+import { adicionarAoCarrinho } from "./menuCarrinho";
 
 // string templates
 // agora com o catalogo
@@ -6,21 +7,29 @@ import { catalogo } from "./dados";
 export function renderizarCatalogo() {
   for (const produtoDoCatalogo of catalogo) {
     const cartaoProdutoCatalogo = `
-  <div id="item-product-${produtoDoCatalogo.idProduto}" class="border-solid border-2 border-sky-500 w-48 p-2 m-2">
+  <div id="item-product-${produtoDoCatalogo.idProduto}" class="border-solid shadow-xl shadow-slate-400 rounded-lg w-48 p-2 m-2 flex flex-col justify-between group">
   <img
-    class="w-48"
+    class="group-hover:scale-110 duration-300 my-3 rounded-lg"
     src="assets/img/${produtoDoCatalogo.nomeArquivoImagem}"
     alt="imagem produto 1"
-    style="height: 240px"
   />
   <div id="legend">
-  <p><strong>${produtoDoCatalogo.marcaProduto}</strong></p>
-  <p>${produtoDoCatalogo.nomeProduto}</p>
-  <p>$${produtoDoCatalogo.precoProduto}</p>
-  <button class="bg-slate-200 text-slate-900" onclick="alert('Adicionado')">Adicionar ao carrinho.</button>
+  <p class="text-lg my-3"><strong>${produtoDoCatalogo.nomeProduto}</strong></p>
+  <p class="text-sm">${produtoDoCatalogo.marcaProduto}</p>
+  <p class="text-base">$${produtoDoCatalogo.precoProduto}</p>
+  <button id="adicionar-${produtoDoCatalogo.idProduto}" class=" bg-slate-950 hover:bg-slate-500 text-slate-200 rounded-lg w-full" onclick="alert('Adicionado')" title="Adicionar ao carrinho."><i class="fa-solid fa-cart-plus"></i></button>
   </div>
   </div>
   `;
     document.getElementById("product-area").innerHTML += cartaoProdutoCatalogo;
+  }
+
+  // adicionarAoCarrinho();
+  for (const produtoDoCatalogo of catalogo) {
+    document
+      .getElementById(`adicionar-${produtoDoCatalogo.idProduto}`)
+      .addEventListener("click", () =>
+        adicionarAoCarrinho(produtoDoCatalogo.idProduto)
+      );
   }
 }

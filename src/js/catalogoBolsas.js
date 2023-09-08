@@ -1,34 +1,23 @@
-// outra forma de fazer
-const catalogoBolsas = [
-  {
-    id: 1,
-    nome: "Bolsa com alça",
-    cor: "Vermelha",
-    masculino: false,
-  },
-  {
-    id: 2,
-    nome: "Bolsa sem alça",
-    cor: "Azul",
-    masculino: true,
-  },
-];
+import { inicializarCarrinho } from "./menuCarrinho";
+import { catalogoBolsa } from "./dados";
 
-for (const produtoDoCatalogoBolsa of catalogoBolsas) {
+inicializarCarrinho();
+
+for (const produtoDoCatalogoBolsa of catalogoBolsa) {
   let sexo;
   if (produtoDoCatalogoBolsa.masculino) {
     sexo = "masculino";
   } else {
     sexo = "feminino";
   }
-  console.log(sexo);
-  const cartaoProdutoCatalogo = `
-  <div id="item-product" class="card-product">
+  const cartaoProdutoCatalogoBolsa = `
+  <div id="item-product-${produtoDoCatalogoBolsa.id}" class="border-solid border-2 border-sky-500 w-48 p-3 h-auto">
   <p><strong>${produtoDoCatalogoBolsa.nome}</strong></p>
   <p>${produtoDoCatalogoBolsa.cor}</p>
   <p>$${sexo}</p>
-  <button onclick="alert('Adicionado')">Adicionar ao carrinho.</button>
+  <button class="bg-slate-200 text-slate-900" onclick="alert('Adicionado')">Adicionar ao carrinho.</button>
   </div>
   `;
-  document.getElementById("product-area").innerHTML += cartaoProdutoCatalogo;
+  document.getElementById("product-area").innerHTML +=
+    cartaoProdutoCatalogoBolsa;
 }

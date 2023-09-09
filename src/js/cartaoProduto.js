@@ -24,7 +24,6 @@ export function renderizarCatalogo() {
     document.getElementById("product-area").innerHTML += cartaoProdutoCatalogo;
   }
 
-  // adicionarAoCarrinho();
   for (const produtoDoCatalogo of catalogo) {
     document
       .getElementById(`adicionar-${produtoDoCatalogo.idProduto}`)

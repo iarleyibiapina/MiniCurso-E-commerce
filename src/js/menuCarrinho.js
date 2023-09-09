@@ -19,24 +19,25 @@ export function inicializarCarrinho() {
   botaoFecharCarrinho.addEventListener("click", fecharCarrinho);
 }
 
-export function adicionarAoCarrinho(idproduto) {
-  const produto = catalogo.find((p) => p.idproduto === idproduto);
+export function adicionarAoCarrinho(idProduto) {
+  const produto = catalogo.find((p) => p.idProduto === idProduto);
   const containerItemCarrinho = document.getElementById("produtos-carrinho");
-  const cartaoItemCarrinho = `<article class="flex bg-slate-100 rounded-lg p-2 my-5 relative ">
-  <div id="espaco-item-carrinho">
+  const cartaoItemCarrinho = `<article class="flex  bg-slate-100 rounded-lg p-2 my-5 relative ">
+  <div id="espaco-item-carrinho" class="flex flex-row w-full ">
             <button class="absolute top-3 right-5">
           <i class="fa-solid fa-xmark" style="color: #000"></i>
         </button>
         <img
-          src="assets/img/product-1.jpg"
+          src="assets/img/${produto.nomeArquivoImagem}"
           alt="imagem-carrinho"
           class="h-24"
         />
-            <div id="textos-item" class="py-2">
+            <div id="textos-item" class="p-2">
               <p class="text-slate-900 text-sm">${produto.nomeProduto}o</p>
-              <ara class="text-slate-400 text-xs">Zara</p>
-              <p id="preco-total" class="text-green-700 text-lg">R$200</p> 
+              <p class="text-slate-400 text-xs">${produto.marcaProduto}</p>
+              <p id="preco-total" class="text-green-700 text-lg">R$${produto.precoProduto}</p> 
             </div>
+  </div>
 </article>`;
   containerItemCarrinho.innerHTML += cartaoItemCarrinho;
 }

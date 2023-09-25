@@ -1,4 +1,7 @@
-import { catalogo } from "./dados";
+import { lerLocalStorage, salvarLocalStorage, catalogo } from "./dados";
+// quantidade de itens
+// operador ?? fornece valor padrao caso o valor a esquerda seja nulo. ou seja se o local storage estiver vazio, vai definir um objeto.
+const idsProdutoCarrinhoComQuantidade = lerLocalStorage("carrinho") ?? {};
 
 function abrirCarrinho() {
   document.getElementById("carrinho").classList.add("right-[0px]");
@@ -18,12 +21,11 @@ export function inicializarCarrinho() {
   botaoAbrirCarrinho.addEventListener("click", abrirCarrinho);
   botaoFecharCarrinho.addEventListener("click", fecharCarrinho);
 }
-
-// quantidade de itens
-const idsProdutoCarrinhoComQuantidade = [];
 function incrementarQuantidadeProdutoCarrinho(idProduto) {
   idsProdutoCarrinhoComQuantidade[idProduto]++;
+  salvarLocalStorage("carrinho", idsProdutoCarrinhoComQuantidade);
   atualizarInformacaoQuantidade(idProduto);
+  atualizarPrecoCarrinho();
 }
 function decrementarQuantidadeProdutoCarrinho(idProduto) {
   if (idsProdutoCarrinhoComQuantidade[idProduto] === 1) {
@@ -31,7 +33,9 @@ function decrementarQuantidadeProdutoCarrinho(idProduto) {
     return;
   }
   idsProdutoCarrinhoComQuantidade[idProduto]--;
+  salvarLocalStorage("carrinho", idsProdutoCarrinhoComQuantidade);
   atualizarInformacaoQuantidade(idProduto);
+  atualizarPrecoCarrinho();
 }
 function atualizarInformacaoQuantidade(idProduto) {
   document.getElementById(`quantidade-${idProduto}`).innerHTML =
@@ -40,7 +44,9 @@ function atualizarInformacaoQuantidade(idProduto) {
 
 function removerDoCarrinho(idProduto) {
   delete idsProdutoCarrinhoComQuantidade[idProduto];
+  salvarLocalStorage("carrinho", idsProdutoCarrinhoComQuantidade);
   renderizarProdutosCarrinho();
+  atualizarPrecoCarrinho();
 }
 
 export function adicionarAoCarrinho(idProduto) {
@@ -49,6 +55,8 @@ export function adicionarAoCarrinho(idProduto) {
     return;
   }
   idsProdutoCarrinhoComQuantidade[idProduto] = 1;
+  salvarLocalStorage("carrinho", idsProdutoCarrinhoComQuantidade);
+  atualizarPrecoCarrinho();
   desenharProdutoNoCarrinho(idProduto);
 }
 
@@ -85,7 +93,7 @@ export function desenharProdutoNoCarrinho(idProduto) {
   <div id="textos-item" class="p-2 flex flex-col justify-between">
   <p class="text-slate-900 text-sm">${produto.nomeProduto}o</p>
   <p class="text-slate-400 text-xs">${produto.marcaProduto}</p>
-  <p id="preco-total" class="text-green-700 text-lg">R$${
+  <p id="preco-item" class="text-green-700 text-lg">R$${
     produto.precoProduto
   }</p> 
             </div>
@@ -119,7 +127,22 @@ export function desenharProdutoNoCarrinho(idProduto) {
     .addEventListener("click", () => removerDoCarrinho(produto.idProduto));
 }
 
-function renderizarProdutosCarrinho() {
+export function atualizarPrecoCarrinho() {
+  const precoCarrinho = document.getElementById("preco-total");
+  let precoTotalCarrinho = 0;
+  //percorre vendo os ids dos produtos e sua quantidade
+  for (const idProdutoNoCarrinho in idsProdutoCarrinhoComQuantidade) {
+    precoTotalCarrinho +=
+      // procurando nos dados do catalogo o id queidProdutoNoCarrinho ao id do produto no carrinho
+      // procura o preço pelo id e multiplica pela quantidade no carrinho
+      catalogo.find((p) => p.idProduto === idProdutoNoCarrinho).precoProduto *
+      idsProdutoCarrinhoComQuantidade[idProdutoNoCarrinho];
+  }
+  precoCarrinho.innerText = `Total: R$${precoTotalCarrinho}`;
+}
+
+export function renderizarProdutosCarrinho() {
+  atualizarPrecoCarrinho();
   const containerProdutosCarrinho =
     document.getElementById("produtos-carrinho");
   containerProdutosCarrinho.innerHTML = "";

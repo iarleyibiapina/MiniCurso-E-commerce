@@ -5,9 +5,11 @@ import {
   inicializarCarrinho,
 } from "./menuCarrinho";
 import { renderizarCatalogo } from "./cartaoProduto";
+import { inicializarFiltro } from "./filtroCatalogo";
 
 // depois de importar é preciso 'ativar' a funçao
 renderizarCatalogo();
-renderizarProdutosCarrinho();
 inicializarCarrinho();
+renderizarProdutosCarrinho();
 atualizarPrecoCarrinho();
+inicializarFiltro();

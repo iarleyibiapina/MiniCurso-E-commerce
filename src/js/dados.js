@@ -13,6 +13,7 @@ export const catalogo = [
     marcaProduto: "Zara",
     precoProduto: 249.99,
     nomeArquivoImagem: "product-1.jpg",
+    feminino: true,
   },
   {
     idProduto: "2",
@@ -20,6 +21,7 @@ export const catalogo = [
     marcaProduto: "Amell",
     precoProduto: 300.0,
     nomeArquivoImagem: "product-2.jpg",
+    feminino: true,
   },
   {
     idProduto: "3",
@@ -27,6 +29,7 @@ export const catalogo = [
     marcaProduto: "Lacoste",
     precoProduto: 350.0,
     nomeArquivoImagem: "product-3.jpg",
+    feminino: true,
   },
   {
     idProduto: "4",
@@ -34,6 +37,7 @@ export const catalogo = [
     marcaProduto: "zent",
     precoProduto: 999.0,
     nomeArquivoImagem: "product-4.jpg",
+    feminino: false,
   },
   {
     idProduto: "5",
@@ -41,6 +45,7 @@ export const catalogo = [
     marcaProduto: "lol",
     precoProduto: 100.0,
     nomeArquivoImagem: "product-5.jpg",
+    feminino: false,
   },
   {
     idProduto: "6",
@@ -48,6 +53,7 @@ export const catalogo = [
     marcaProduto: "Boss",
     precoProduto: 1000.0,
     nomeArquivoImagem: "product-6.jpg",
+    feminino: true,
   },
   {
     idProduto: "7",
@@ -55,6 +61,7 @@ export const catalogo = [
     marcaProduto: "Dior",
     precoProduto: 450,
     nomeArquivoImagem: "product-7.jpg",
+    feminino: false,
   },
   {
     idProduto: "8",
@@ -62,6 +69,7 @@ export const catalogo = [
     marcaProduto: "Gucci",
     precoProduto: 599.9,
     nomeArquivoImagem: "product-8.jpg",
+    feminino: false,
   },
 ];
 
@@ -79,3 +87,50 @@ export const catalogoBolsa = [
     masculino: true,
   },
 ];
+
+export function desenharProdutoNoCarrinhoSimples(
+  idProduto,
+  idContainerHTML,
+  quantidadeProduto
+) {
+  const produto = catalogo.find((p) => p.idProduto === idProduto);
+  const containerItemCarrinho = document.getElementById(idContainerHTML);
+
+  // separando article
+  // cria tag article
+  const elementoArticle = document.createElement("article");
+  // cria classes para a tag
+  const articleClasses = [
+    "flex",
+    "bg-stone-200",
+    "rounded-lg",
+    "p-1",
+    "relative",
+    "mb-2",
+    "w-96",
+  ];
+  for (const articleClass of articleClasses) {
+    elementoArticle.classList.add(articleClass);
+  }
+
+  const cartaoItemCarrinho = `
+  <div id="espaco-item-carrinho" class="flex flex-row w-full ">
+  <img
+  src="../assets/img/${produto.nomeArquivoImagem}"
+  alt="imagem-carrinho"
+  class="h-24"
+  />
+  <div id="textos-item" class="p-2 flex flex-col justify-between">
+  <p class="text-slate-900 text-sm">${produto.nomeProduto}o</p>
+  <p class="text-slate-400 text-xs">${produto.marcaProduto}</p>
+  <p id="preco-item" class="text-green-700 text-lg">R$${produto.precoProduto}</p> 
+            </div>
+            <div class="flex text-slate-950 items-end absolute bottom-0 right-4 text-lg'">
+            <p id="quantidade-${produto.idProduto}" class="ml-1">${quantidadeProduto}</p>
+            </div>
+            </div>
+            `;
+  // tira os btns de - e +, tira do o botao de excluir
+  elementoArticle.innerHTML = cartaoItemCarrinho;
+  containerItemCarrinho.appendChild(elementoArticle);
+}

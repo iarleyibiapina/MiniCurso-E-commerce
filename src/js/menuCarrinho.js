@@ -17,9 +17,11 @@ function fecharCarrinho() {
 export function inicializarCarrinho() {
   const botaoFecharCarrinho = document.getElementById("fechar-carrinho");
   const botaoAbrirCarrinho = document.getElementById("abrir-carrinho");
+  const btnIrParaCheckout = document.getElementById("finalizar-compra");
 
   botaoAbrirCarrinho.addEventListener("click", abrirCarrinho);
   botaoFecharCarrinho.addEventListener("click", fecharCarrinho);
+  btnIrParaCheckout.addEventListener("click", irParaCheckout);
 }
 function incrementarQuantidadeProdutoCarrinho(idProduto) {
   idsProdutoCarrinhoComQuantidade[idProduto]++;
@@ -38,7 +40,7 @@ function decrementarQuantidadeProdutoCarrinho(idProduto) {
   atualizarPrecoCarrinho();
 }
 function atualizarInformacaoQuantidade(idProduto) {
-  document.getElementById(`quantidade-${idProduto}`).innerHTML =
+  document.getElementById(`quantidade-${idProduto}`).innerText =
     idsProdutoCarrinhoComQuantidade[idProduto];
 }
 
@@ -149,4 +151,13 @@ export function renderizarProdutosCarrinho() {
   for (const idProduto in idsProdutoCarrinhoComQuantidade) {
     desenharProdutoNoCarrinho(idProduto);
   }
+}
+
+function irParaCheckout() {
+  // veririfica pelos ids do carrinho, se está vazio, pega o tamanho do array que seria cada item no carrinho. se estiver vazio ele retorna.
+  if (Object.keys(idsProdutoCarrinhoComQuantidade).length === 0) {
+    return;
+  }
+  // pega a url atual e adiciona este codigo no final.
+  window.location.href = window.location.origin + "/views/checkout.html";
 }

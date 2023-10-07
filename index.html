@@ -42,7 +42,10 @@
         >
           Total:
         </p>
-        <button class="bg-slate-200 text-slate-900 p-1">
+        <button
+          id="finalizar-compra"
+          class="bg-slate-200 text-slate-900 p-1 hover:text-slate-300 hover:bg-slate-700"
+        >
           Finalizar compra
         </button>
       </footer>
@@ -57,16 +60,62 @@
           href="./views/paginaBolsas.html"
           title="Ir para aba de bolsas"
         >
-          <i class="fa-solid fa-hand"></i>
+          <i class="fa-solid fa-bag-shopping"></i>
         </button>
         <button title="Perfil"><i class="fa-solid fa-user"></i></button>
+        <button title="Checkout" onclick="location = './views/checkout.html'">
+          <i class="fa-solid fa-credit-card"></i>
+        </button>
         <button id="abrir-carrinho" title="Carrinho">
           <i class="fa-solid fa-cart-arrow-down" style="color: #ffffff"></i>
         </button>
       </div>
     </header>
     <!-- main -->
-    <main>
+    <main class="flex flex-col items-center">
+      <section id="filtros" class="p-10 flex">
+        <div class="px-2">
+          <!-- name permite apenas um radio por vez -->
+          <input
+            type="radio"
+            name="filtros"
+            id="exibir-todos"
+            class="peer hidden"
+            checked
+          />
+          <label
+            for="exibir-todos"
+            class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-lg select-none cursor-pointer"
+            >Todos</label
+          >
+        </div>
+        <div class="px-2">
+          <input
+            name="filtros"
+            type="radio"
+            id="exibir-masculino"
+            class="peer hidden"
+          />
+          <label
+            for="exibir-masculino"
+            class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-lg select-none cursor-pointer"
+            >Masculinos</label
+          >
+        </div>
+        <div class="px-2">
+          <input
+            name="filtros"
+            type="radio"
+            id="exibir-feminino"
+            class="peer hidden"
+          />
+          <label
+            for="exibir-feminino"
+            class="peer-checked:bg-slate-950 peer-checked:text-slate-200 peer-checked:font-bold p-2 rounded-lg select-none cursor-pointer"
+            >Femininos</label
+          >
+        </div>
+      </section>
       <section
         id="product-area"
         class="flex flex-wrap p-5 justify-center gap-5"

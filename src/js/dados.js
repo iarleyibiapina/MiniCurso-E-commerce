@@ -6,6 +6,10 @@ export function lerLocalStorage(chave) {
   return JSON.parse(localStorage.getItem(chave));
 }
 
+export function apagarDoLocalStorage(chave) {
+  localStorage.removeItem(chave);
+}
+
 export const catalogo = [
   {
     idProduto: "1",
@@ -90,12 +94,11 @@ export const catalogoBolsa = [
 
 export function desenharProdutoNoCarrinhoSimples(
   idProduto,
-  idContainerHTML,
+  idContainerHtml,
   quantidadeProduto
 ) {
   const produto = catalogo.find((p) => p.idProduto === idProduto);
-  const containerItemCarrinho = document.getElementById(idContainerHTML);
-
+  const containerProdutosCarrinho = document.getElementById(idContainerHtml);
   // separando article
   // cria tag article
   const elementoArticle = document.createElement("article");
@@ -132,5 +135,5 @@ export function desenharProdutoNoCarrinhoSimples(
             `;
   // tira os btns de - e +, tira do o botao de excluir
   elementoArticle.innerHTML = cartaoItemCarrinho;
-  containerItemCarrinho.appendChild(elementoArticle);
+  containerProdutosCarrinho.appendChild(elementoArticle);
 }
